@@ -1,13 +1,15 @@
-from unicodedata import name
+from main import tmdb
 
 
 class Person:
-    def __init__(self):
+    def __init__(self, name):
         self.name = name
         self.watched = []
         self.watchlist = []
     
     def append_watched(self, movie):
+        result = tmdb.search(movie).json()['results']
+        
         self.watched.append(movie)
     
     def get_watched(self):
