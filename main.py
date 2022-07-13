@@ -1,21 +1,25 @@
-from urllib import response
-import requests
-import config
+import pickle
+from objects import person
+from tmdb import tmdb
 
-class tmdb:
-    def search(movie):
-        words = movie.split()
-        movie = '+'.join(words)
-        response = requests.get('https://api.themoviedb.org/3/search/movie?api_key={}&query={}'.format(config.api_key, movie))
+# pickle_off = open("EmpID.pickle", 'rb')
+# EmpID = pickle.load(pickle_off)
+# print(EmpID)
 
-        #results = response.json()['results']
-
-        return response
-
-    def search_by_id(movieid):
-        response = requests.get('')
+print('\nWelcome to Movie Tracker\n')
+ans = input('Are you an existing user?(Y/n)')
+if ans == 'Y' or ans == 'y':
+    print('\nLogin.')
+    userid = input('Enter userid: ')
+    pword = input('Enter password: ')
+    main()
+else:
+    print('\nSign Up.')
+    name = input('Enter your name: ')
+    userid = input('Enter userid: ')
+    pword = input('Enter password: ')
+    nuser = person(name, userid, pword)
 
 def main():
-    response = requests.get('https://api.themoviedb.org/3/genre/movie/list?api_key={}&language=en-US'.format(config.api_key))
-    print(response.json())
-main()
+
+
