@@ -22,8 +22,8 @@ def main(suser, db):
             ka = 'y'
             while ka == 'Y' or ka == 'y':
                 mvname = input('Movie name: ')
-                if suser.append_watched(mvname) != None:
-                    mvid, mv = suser.append_watched(mvname)
+                mvid, mv = suser.append_watched(mvname)
+                if mvid != None:
                     if mvid not in  db['mvdb']:
                         db['mvdb'][mvid] = mv
                     print('Added to watched.')

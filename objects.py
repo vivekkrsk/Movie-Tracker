@@ -36,7 +36,7 @@ class person:
         result = tmdb.search(movie).json()['results']
         if len(result) == 0:
             '\nPlease check the spelling of the movie.'
-            return None
+            return None, None
         j = 1
         for i in result:
             if j > 5:
