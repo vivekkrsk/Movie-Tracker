@@ -1,6 +1,8 @@
 import imp
 from tmdb import tmdb
 from genre_ids import genres
+import pandas as pd
+import matplotlib.pyplot as plt
 
 
 class person:
@@ -30,6 +32,8 @@ class person:
             'Thriller' : 0,
             'War' : 0,
             'Western' : 0}
+        
+        self.top_genre = ['Action', 'Adventure',]
 
     
     def append_watched(self, movie):
@@ -46,11 +50,15 @@ class person:
         
         idx = int(input('\nEnter index number : '))
         list1 = [result[idx-1]['id'], result[idx-1]['title']]
-        self.watched.append(list1)
-        for i in result[idx-1]['genre_ids']:
-            self.genre_count[genres[i]] += 1
-        
-        return result[idx-1]['id'], result[idx-1]
+        if list1 not in self.watched:
+            self.watched.append(list1)
+            for i in result[idx-1]['genre_ids']:
+                self.genre_count[genres[i]] += 1
+            
+            return result[idx-1]['id'], result[idx-1]
+        else:
+            print("\nYou have already added this movie to watched.")
+            return None, None
     
     def get_watched(self):
         return self.watched
@@ -78,6 +86,17 @@ class person:
         self.watchlist.remove(movie)
     
     def show_stats(self):
-        print('Genre Count: \n')
-        print(self.genre_count)
+        genre_count_data = {'genres' : self.genre_count.keys(), 'counts' : self.genre_count.values()}
+        genre_count_df = pd.DataFrame.from_dict(genre_count_data)
+
+        print('\nYour top genres: ')
+        print(genre_count_df.nlargest(5, 'counts').to_string(index=False))
+
+        pie_s_n = input('\nDo you want to see the pie chart?(y/n)')
+        if pie_s_n == 'y' or pie_s_n == 'Y':
+            plt.pie(genre_count_df["counts"], labels=genre_count_df["genres"])
+            plt.show()
+
+
+        
     

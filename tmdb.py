@@ -12,9 +12,6 @@ class tmdb:
 
         return response
 
-    def search_by_id(movieid):
-        response = requests.get('')
-
 def main():
     response = requests.get('https://api.themoviedb.org/3/genre/movie/list?api_key={}&language=en-US'.format(config.api_key))
     print(response.json())

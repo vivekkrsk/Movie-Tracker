@@ -41,6 +41,10 @@ def main(suser, db):
             for i in suser.get_watched():
                 print(i[1])
         
+        elif ans == 4:
+            for i in suser.get_watchlist():
+                print(i[1])
+        
         elif ans == 5:
             suser.show_stats()
         
