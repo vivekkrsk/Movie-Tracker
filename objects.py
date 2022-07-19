@@ -95,6 +95,7 @@ class person:
         pie_s_n = input('\nDo you want to see the pie chart?(y/n)')
         if pie_s_n == 'y' or pie_s_n == 'Y':
             plt.pie(genre_count_df["counts"], labels=genre_count_df["genres"])
+            plt.title('Genre pie chart')
             plt.show()
 
 

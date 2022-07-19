@@ -7,6 +7,7 @@ pickle_off = open("db.pickle", 'rb')
 db = pickle.load(pickle_off)
 
 def main(suser, db):
+    print('\nWelcome , ' + suser.name)
     check = 'y'
     while check == 'Y' or check == 'y':
         print('\n')
@@ -28,6 +29,9 @@ def main(suser, db):
                         db['mvdb'][mvid] = mv
                     print('Added to watched.')
                     ka = input('Keep adding?(Y/n)')
+            pickling_on = open("db.pickle","wb")
+            pickle.dump(db, pickling_on)
+            pickling_on.close()
 
         elif ans == 2:
             ka = 'y'
@@ -77,6 +81,9 @@ def sign_up(db):
     pword = input('Enter password: ')
     nuser = person(name, userid, pword)
     db['users'][userid] = nuser
+    pickling_on = open("db.pickle","wb")
+    pickle.dump(db, pickling_on)
+    pickling_on.close()
     main(nuser, db)
 
 def developer(db):
